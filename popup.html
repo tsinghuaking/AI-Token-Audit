@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Token Monitor</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app">
+    <!-- 顶部标题栏 -->
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text" data-i18n="appName">AI Token 监控</span>
+      </div>
+      <div class="header-actions">
+        <button class="icon-btn" id="btnRefresh" title="Refresh">↻</button>
+        <button class="icon-btn" id="btnOptions" title="Settings">⚙</button>
+      </div>
+    </header>
+
+    <!-- Tab 导航 -->
+    <nav class="tabs">
+      <button class="tab active" data-tab="realtime" data-i18n="tabRealtime">实时</button>
+      <button class="tab" data-tab="history" data-i18n="tabHistory">历史</button>
+      <button class="tab" data-tab="stats" data-i18n="tabStats">统计</button>
+    </nav>
+
+    <!-- 实时面板 -->
+    <section class="tab-panel active" id="panel-realtime">
+      <div class="realtime-summary">
+        <div class="summary-card">
+          <div class="summary-label" data-i18n="today">今日</div>
+          <div class="summary-value" id="todayCalls">0</div>
+          <div class="summary-sub" data-i18n="totalCalls">调用次数</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-label" data-i18n="totalTokens">总 Token</div>
+          <div class="summary-value" id="todayTokens">0</div>
+          <div class="summary-sub" id="todayCost">$0.00</div>
+        </div>
+      </div>
+      <div class="realtime-list" id="realtimeList">
+        <div class="empty-state">
+          <div class="empty-icon">📡</div>
+          <div class="empty-title" data-i18n="noCalls">暂无调用记录</div>
+          <div class="empty-desc" data-i18n="noCallsDesc">打开任意大模型网页开始聊天，记录将自动出现在这里</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 历史面板 -->
+    <section class="tab-panel" id="panel-history">
+      <div class="history-toolbar">
+        <select id="historyRange" class="range-select">
+          <option value="today" data-i18n="today">今日</option>
+          <option value="week" data-i18n="thisWeek">本周</option>
+          <option value="month" data-i18n="thisMonth">本月</option>
+          <option value="all" data-i18n="allTime">全部</option>
+        </select>
+        <div class="toolbar-actions">
+          <button class="btn btn-sm" id="btnExportJSON" data-i18n="exportJSON">导出 JSON</button>
+          <button class="btn btn-sm" id="btnExportCSV" data-i18n="exportCSV">导出 CSV</button>
+          <button class="btn btn-sm btn-danger" id="btnClearAll" data-i18n="clearAll">清空</button>
+        </div>
+      </div>
+      <div class="history-list" id="historyList"></div>
+    </section>
+
+    <!-- 统计面板 -->
+    <section class="tab-panel" id="panel-stats">
+      <div class="stats-overview">
+        <div class="stat-row">
+          <span class="stat-label" data-i18n="totalCalls">总调用次数</span>
+          <span class="stat-value" id="statCalls">0</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label" data-i18n="totalTokens">总 Token 数</span>
+          <span class="stat-value" id="statTokens">0</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label" data-i18n="totalCost">总成本</span>
+          <span class="stat-value" id="statCost">$0.00</span>
+        </div>
+      </div>
+      <div class="stats-section">
+        <h3 class="stats-title" data-i18n="byModel">按模型</h3>
+        <div class="stats-bars" id="statsByModel"></div>
+      </div>
+      <div class="stats-section">
+        <h3 class="stats-title" data-i18n="byDomain">按域名</h3>
+        <div class="stats-bars" id="statsByDomain"></div>
+      </div>
+      <div class="stats-section">
+        <h3 class="stats-title" data-i18n="byDay">按日期</h3>
+        <div class="stats-bars" id="statsByDay"></div>
+      </div>
+    </section>
+
+    <!-- 详情弹窗 -->
+    <div class="modal-overlay" id="detailModal">
+      <div class="modal">
+        <div class="modal-header">
+          <span class="modal-title" data-i18n="detailTitle">调用详情</span>
+          <button class="modal-close" id="modalClose">×</button>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

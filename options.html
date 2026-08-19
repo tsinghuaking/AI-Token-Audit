@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Token Monitor - Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header class="page-header">
+      <h1>⚡ AI Token Monitor</h1>
+      <p class="subtitle" data-i18n="settingsTitle">设置</p>
+    </header>
+
+    <!-- 语言设置 -->
+    <section class="settings-section">
+      <h2 data-i18n="language">语言</h2>
+      <div class="form-row">
+        <select id="langSelect" class="form-select">
+          <option value="auto" data-i18n="auto">自动（跟随浏览器）</option>
+          <option value="zh_CN" data-i18n="chinese">中文</option>
+          <option value="en" data-i18n="english">English</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- 模型价格配置 -->
+    <section class="settings-section">
+      <h2 data-i18n="pricingConfig">模型价格配置</h2>
+      <p class="section-desc" data-i18n="pricingDesc">自定义各模型的输入/输出价格（美元 / 1K tokens），支持通配符 *</p>
+      <div class="pricing-table" id="pricingTable">
+        <div class="pricing-header">
+          <span class="col-pattern" data-i18n="pattern">模型匹配</span>
+          <span class="col-label" data-i18n="label">显示名称</span>
+          <span class="col-input" data-i18n="inputPrice">输入价格</span>
+          <span class="col-output" data-i18n="outputPrice">输出价格</span>
+          <span class="col-action"></span>
+        </div>
+        <div id="pricingRows"></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="btnAddPricing" data-i18n="addPricing">+ 添加价格规则</button>
+      </div>
+    </section>
+
+    <!-- 告警配置 -->
+    <section class="settings-section">
+      <h2 data-i18n="alertConfig">告警配置</h2>
+      <p class="section-desc" data-i18n="alertDesc">当 Token 消耗或成本达到阈值时发送浏览器通知</p>
+      <div class="form-row">
+        <label class="checkbox-label">
+          <input type="checkbox" id="alertEnabled">
+          <span data-i18n="enableAlert">启用告警</span>
+        </label>
+      </div>
+      <div class="form-grid">
+        <div class="form-item">
+          <label data-i18n="dailyTokenThreshold">每日 Token 阈值</label>
+          <input type="number" id="dailyTokenThreshold" class="form-input" placeholder="100000">
+        </div>
+        <div class="form-item">
+          <label data-i18n="dailyCostThreshold">每日成本阈值（美元）</label>
+          <input type="number" id="dailyCostThreshold" class="form-input" step="0.01" placeholder="1.00">
+        </div>
+        <div class="form-item">
+          <label data-i18n="perCallTokenThreshold">单次调用 Token 阈值</label>
+          <input type="number" id="perCallTokenThreshold" class="form-input" placeholder="10000">
+        </div>
+        <div class="form-item">
+          <label data-i18n="perCallCostThreshold">单次调用成本阈值（美元）</label>
+          <input type="number" id="perCallCostThreshold" class="form-input" step="0.01" placeholder="0.10">
+        </div>
+      </div>
+    </section>
+
+    <!-- 数据管理 -->
+    <section class="settings-section">
+      <h2 data-i18n="dataManagement">数据管理</h2>
+      <p class="section-desc" data-i18n="dataDesc">所有数据存储在本地 IndexedDB，不会上传到任何服务器</p>
+      <div class="form-actions">
+        <button class="btn" id="btnExportJSON" data-i18n="exportJSON">导出 JSON</button>
+        <button class="btn" id="btnExportCSV" data-i18n="exportCSV">导出 CSV</button>
+        <button class="btn btn-danger" id="btnClearData" data-i18n="clearData">清空所有数据</button>
+      </div>
+    </section>
+
+    <!-- 保存按钮 -->
+    <div class="save-bar">
+      <button class="btn btn-primary btn-lg" id="btnSave" data-i18n="save">保存设置</button>
+      <span class="save-status" id="saveStatus"></span>
+    </div>
+
+    <!-- 关于 -->
+    <section class="settings-section about-section">
+      <h2 data-i18n="about">关于</h2>
+      <p><span data-i18n="version">版本</span>: 1.0.0</p>
+      <p>100% 本地运行 · 零配置 · 全协议覆盖</p>
+    </section>
+  </div>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>
