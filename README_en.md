@@ -86,7 +86,7 @@
    - **History** tab: all historical calls, with filtering and export
    - **Stats** tab: usage distribution by model / domain / date
 4. Click the ⚙ icon (top-right) to open settings:
-   - Configure model pricing (input/output per 1K tokens, wildcard supported)
+   - Configure model pricing (input/output per 1M tokens, wildcard supported)
    - Set alert thresholds
    - Switch language
    - Export or clear data
@@ -135,7 +135,7 @@ ai-token-audit/
 
 Add rules in the "Model Pricing" section of the settings page:
 
-| Model Pattern (wildcard supported) | Label | Input Price ($/1K) | Output Price ($/1K) |
+| Model Pattern (wildcard supported) | Label | Input Price ($/1M) | Output Price ($/1M) |
 |---|---|---|---|
 | `gpt-4o*` | GPT-4o | 2.50 | 10.00 |
 | `claude-*-sonnet-*` | Claude Sonnet | 3.00 | 15.00 |

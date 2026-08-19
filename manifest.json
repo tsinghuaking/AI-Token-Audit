@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "AI Token Audit",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "实时监测网页AI调用的Token消耗、真实模型与成本，支持历史统计、告警与导出。100%本地运行。",
   "permissions": [
     "storage",
