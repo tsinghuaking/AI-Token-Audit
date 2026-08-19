@@ -11,8 +11,8 @@
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Manifest](https://img.shields.io/badge/Manifest-V3-blue.svg)
 ![Browser](https://img.shields.io/badge/Browser-Chrome%2FEdge-blue.svg)
-[![Release](https://img.shields.io/github/v/release/tsinghuaking/Token-Audit?label=Release)](https://github.com/tsinghuaking/Token-Audit/releases)
-[![Download](https://img.shields.io/github/downloads/tsinghuaking/Token-Audit/total?label=Downloads)](https://github.com/tsinghuaking/Token-Audit/releases)
+[![Release](https://img.shields.io/github/v/release/tsinghuaking/AI-Token-Audit?label=Release)](https://github.com/tsinghuaking/AI-Token-Audit/releases)
+[![Download](https://img.shields.io/github/downloads/tsinghuaking/AI-Token-Audit/total?label=Downloads)](https://github.com/tsinghuaking/AI-Token-Audit/releases)
 
 </div>
 
@@ -58,7 +58,7 @@
 
 > ⚠️ **注意**：Chrome 浏览器不支持直接拖入 `.crx` 文件安装（会提示"未列在 Chrome 应用商店中"且无法启用），请按以下步骤操作：
 
-1. 到 [Releases](https://github.com/tsinghuaking/Token-Audit/releases) 下载 **`AI-Token-Audit-v1.0.crx`**
+1. 到 [Releases](https://github.com/tsinghuaking/AI-Token-Audit/releases) 下载 **`AI-Token-Audit-v1.0.crx`**
 2. 将下载的 `.crx` 文件后缀改为 `.zip`，然后解压到一个文件夹（如 `AI-Token-Audit/`）
 3. 打开 Chrome / Edge，地址栏输入 `chrome://extensions/`
 4. 右上角开启「**开发者模式**」
@@ -69,7 +69,7 @@
 
 ### 方式二：从源码加载（开发者）
 
-1. `git clone https://github.com/tsinghuaking/Token-Audit.git`
+1. `git clone https://github.com/tsinghuaking/AI-Token-Audit.git`
 2. 打开 `chrome://extensions/`，开启「开发者模式」
 3. 点击「加载已解压的扩展程序」，选择项目文件夹即可
 

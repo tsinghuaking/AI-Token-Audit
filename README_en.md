@@ -11,8 +11,8 @@
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Manifest](https://img.shields.io/badge/Manifest-V3-blue.svg)
 ![Browser](https://img.shields.io/badge/Browser-Chrome%2FEdge-blue.svg)
-[![Release](https://img.shields.io/github/v/release/tsinghuaking/Token-Audit?label=Release)](https://github.com/tsinghuaking/Token-Audit/releases)
-[![Download](https://img.shields.io/github/downloads/tsinghuaking/Token-Audit/total?label=Downloads)](https://github.com/tsinghuaking/Token-Audit/releases)
+[![Release](https://img.shields.io/github/v/release/tsinghuaking/AI-Token-Audit?label=Release)](https://github.com/tsinghuaking/AI-Token-Audit/releases)
+[![Download](https://img.shields.io/github/downloads/tsinghuaking/AI-Token-Audit/total?label=Downloads)](https://github.com/tsinghuaking/AI-Token-Audit/releases)
 
 </div>
 
@@ -58,7 +58,7 @@
 
 > ⚠️ **Note**: Chrome does **not** support direct drag-and-drop installation of `.crx` files (it will show "not listed in Chrome Web Store" and cannot be enabled). Please follow these steps:
 
-1. Download **`AI-Token-Audit-v1.0.crx`** from the [Releases](https://github.com/tsinghuaking/Token-Audit/releases) page.
+1. Download **`AI-Token-Audit-v1.0.crx`** from the [Releases](https://github.com/tsinghuaking/AI-Token-Audit/releases) page.
 2. Rename the `.crx` file to `.zip`, then extract it into a folder (e.g. `AI-Token-Audit/`).
 3. Open `chrome://extensions/` in Chrome / Edge.
 4. Enable "**Developer mode**" in the top-right corner.
@@ -69,7 +69,7 @@
 
 ### Load from source (for developers)
 
-1. `git clone https://github.com/tsinghuaking/Token-Audit.git`
+1. `git clone https://github.com/tsinghuaking/AI-Token-Audit.git`
 2. Open `chrome://extensions/`, enable "Developer mode".
 3. Click "Load unpacked" and select the project folder.
 
