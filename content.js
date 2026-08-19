@@ -7,8 +7,8 @@
  * 4. 监听 background/popup 的查询请求，返回当前页面状态
  */
 
-const EXT_ID = '__ai_token_monitor__';
-const INJECTED_FLAG = '__ai_token_monitor_injected__';
+const EXT_ID = '__ai_token_audit__';
+const INJECTED_FLAG = '__ai_token_audit_injected__';
 
 // ---------- 注入 injected.js 到页面主世界 ----------
 
