@@ -48,27 +48,50 @@ body {
 }
 
 /* ===== 页头 ===== */
+/* ===== 页头（左右布局） ===== */
 .page-header {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
   margin-bottom: 28px;
+  flex-wrap: wrap;
 }
-
+.header-left { flex: 1; min-width: 0; }
 .page-header h1 {
   font-size: 26px;
   font-weight: 800;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
   letter-spacing: -0.02em;
+  margin: 0 0 6px;
+  display: flex;
+  align-items: center;
 }
-
 .subtitle {
   color: var(--text-muted);
-  font-size: 14px;
-  margin-top: 6px;
+  font-size: 13px;
+  margin: 0;
   font-weight: 500;
+  line-height: 1.5;
 }
+.header-right { display: flex; gap: 10px; flex-shrink: 0; }
+
+/* 头部社交按钮 */
+.hdr-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  width: 108px; height: 40px; padding: 0 12px; border-radius: var(--radius-pill);
+  color: #fff; text-decoration: none; font-size: 13px; font-weight: 500;
+  line-height: 1; transition: filter .15s, transform .1s; white-space: nowrap; flex: none;
+}
+.hdr-btn:hover { filter: brightness(1.08); }
+.hdr-btn:active { transform: translateY(1px); }
+.hdr-btn svg { width: 17px; height: 17px; fill: #fff; flex: none; }
+.hdr-btn--wx { background: #07C160; }
+.hdr-btn--wx:hover { background: #06AD56; }
+.hdr-btn--xhs { background: #FE2C55; }
+.hdr-btn--xhs:hover { background: #E81C45; }
+.hdr-btn--gh { background: #24292f; }
+.hdr-btn--gh:hover { background: #1b1f23; }
 
 /* ===== 设置区块 ===== */
 .settings-section {
@@ -333,4 +356,19 @@ body {
 
 .about-section p {
   margin-bottom: 4px;
+}
+
+/* ===== 底部版权 ===== */
+.site-footer {
+  text-align: center;
+  margin-top: 8px;
+  padding: 18px 0 4px;
+  color: var(--text-secondary);
+  font-size: 12.5px;
+  line-height: 1.9;
+  border-top: 1px solid var(--border-light);
+}
+.site-footer .muted {
+  color: var(--text-muted);
+  font-size: 11.5px;
 }

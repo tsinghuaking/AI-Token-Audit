@@ -1,6 +1,10 @@
 [简体中文](README.md) | English
 
 <div align="center">
+<img src="docs/logo.png" alt="AI Token Audit" width="260">
+</div>
+
+<div align="center">
 
 # AI Token Audit
 
