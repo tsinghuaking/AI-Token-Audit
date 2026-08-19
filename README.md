@@ -1,6 +1,28 @@
-# AI Token Monitor — 浏览器扩展
+简体中文 | [English](README_en.md)
 
-实时监测网页端 AI 调用的 Token 消耗、真实模型与成本，支持历史统计、告警与数据导出。**100% 本地运行，零配置，不上传任何数据。**
+<div align="center">
+
+# AI Token Audit
+
+</div>
+
+<div align="center">
+
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Manifest](https://img.shields.io/badge/Manifest-V3-blue.svg)
+![Browser](https://img.shields.io/badge/Browser-Chrome%2FEdge-blue.svg)
+[![Release](https://img.shields.io/github/v/release/tsinghuaking/Token-Audit?label=Release)](https://github.com/tsinghuaking/Token-Audit/releases)
+[![Download](https://img.shields.io/github/downloads/tsinghuaking/Token-Audit/total?label=Downloads)](https://github.com/tsinghuaking/Token-Audit/releases)
+
+</div>
+
+## 项目简介
+
+**AI Token Audit** 是一款浏览器扩展，用来**实时监测网页端 AI 调用的 Token 消耗、真实模型与成本**，支持历史统计、告警与数据导出。装上即用，零配置，所有数据 100% 存储在本地，不上传任何网络。
+
+**AI Token Audit** is a browser extension that **monitors token consumption, actual model, and cost of web AI calls in real time**, with history statistics, alerts, and data export. Zero-configuration, 100% local storage, no data uploaded.
+
+> 为什么需要它：各类套壳 AI 平台的积分制度不透明，你花了多少积分、实际调用了哪个模型、对应官方 API 真实成本是多少，往往一无所知。这个工具把这些黑盒数据全部透明化。
 
 ## ✨ 功能特性
 
