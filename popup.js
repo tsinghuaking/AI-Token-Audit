@@ -38,7 +38,16 @@ function getProtocolLabel(protocol) {
     'openai-embedding': 'Embedding',
     'anthropic': 'Anthropic',
     'gemini': 'Gemini',
-    'unknown': 'Unknown'
+    'unknown': 'Unknown',
+    'generic': 'Generic (强制)',
+    'chatgpt-web': 'ChatGPT Web',
+    'claude-web': 'Claude Web',
+    'gemini-web': 'Gemini Web',
+    'doubao-web': '豆包',
+    'kimi-web': 'Kimi',
+    'qwen-web': '通义',
+    'wenxin-web': '文心',
+    'deepseek-web': 'DeepSeek'
   };
   return map[protocol] || protocol;
 }
@@ -335,6 +344,46 @@ chrome.runtime.onMessage.addListener((msg) => {
   }
 });
 
+// ---------- 站点统计 ----------
+let currentSiteDomain = '';
+let currentSiteTracked = false;
+
+async function loadSiteStatus() {
+  const domainEl = document.getElementById('currentDomain');
+  const btn = document.getElementById('btnTrackSite');
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (!tab || !tab.url) { domainEl.textContent = '—'; btn.style.display = 'none'; return; }
+    const url = new URL(tab.url);
+    currentSiteDomain = url.hostname;
+    domainEl.textContent = currentSiteDomain;
+    domainEl.title = currentSiteDomain;
+    const resp = await chrome.runtime.sendMessage({ type: 'isDomainTracked', payload: { domain: currentSiteDomain } });
+    currentSiteTracked = resp && resp.ok && resp.tracked;
+    updateSiteButton();
+    btn.style.display = '';
+  } catch (e) { domainEl.textContent = '—'; btn.style.display = 'none'; }
+}
+
+function updateSiteButton() {
+  const btn = document.getElementById('btnTrackSite');
+  if (currentSiteTracked) {
+    btn.textContent = '✓ 统计中'; btn.classList.add('active'); btn.title = '点击停止统计本站';
+  } else {
+    btn.textContent = '统计本站'; btn.classList.remove('active'); btn.title = '点击开启本站的 AI Token 统计';
+  }
+}
+
+async function toggleSiteTracking() {
+  if (!currentSiteDomain) return;
+  const btn = document.getElementById('btnTrackSite');
+  btn.disabled = true;
+  try {
+    const resp = await chrome.runtime.sendMessage({ type: 'toggleDomainTracking', payload: { domain: currentSiteDomain, enable: !currentSiteTracked } });
+    if (resp && resp.ok) { currentSiteTracked = !currentSiteTracked; updateSiteButton(); }
+  } finally { btn.disabled = false; }
+}
+
 // ---------- 事件绑定 ----------
 
 function bindEvents() {
@@ -354,6 +403,8 @@ function bindEvents() {
   document.getElementById('btnOptions').addEventListener('click', () => {
     chrome.runtime.openOptionsPage();
   });
+  // 统计本站
+  document.getElementById('btnTrackSite').addEventListener('click', toggleSiteTracking);
 
   // 历史范围
   document.getElementById('historyRange').addEventListener('change', loadHistory);
@@ -381,6 +432,7 @@ function applyI18n() {
 async function init() {
   applyI18n();
   bindEvents();
+  await loadSiteStatus();
   await loadTodaySummary();
   // 加载最近的记录到实时面板
   const resp = await chrome.runtime.sendMessage({ type: 'getRecords', payload: { limit: 10 } });

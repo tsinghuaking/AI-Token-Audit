@@ -36,6 +36,37 @@ async function saveSettings(settings) {
   await chrome.storage.local.set({ atm_settings: settings });
 }
 
+// ---------- 域名白名单（统计本站） ----------
+async function getTrackedDomains() {
+  const stored = await chrome.storage.local.get('atm_tracked_domains');
+  return stored.atm_tracked_domains || [];
+}
+async function isDomainTracked(domain) {
+  const list = await getTrackedDomains();
+  return list.includes(domain);
+}
+async function toggleDomainTracking(domain, enable) {
+  let list = await getTrackedDomains();
+  if (enable) {
+    if (!list.includes(domain)) list.push(domain);
+  } else {
+    list = list.filter(d => d !== domain);
+  }
+  await chrome.storage.local.set({ atm_tracked_domains: list });
+  // 通知所有匹配的 tab 启用/禁用强制模式
+  const tabs = await chrome.tabs.query({});
+  for (const tab of tabs) {
+    if (!tab.url) continue;
+    try {
+      const url = new URL(tab.url);
+      if (url.hostname === domain) {
+        chrome.tabs.sendMessage(tab.id, { type: 'forceMode:set', enabled: enable }).catch(() => {});
+      }
+    } catch {}
+  }
+  return list;
+}
+
 // ---------- 告警状态追踪 ----------
 
 const alertState = {
@@ -216,6 +247,16 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
           sendResponse({ ok: true });
           break;
         }
+        case 'isDomainTracked': {
+          const tracked = await isDomainTracked(msg.payload.domain);
+          sendResponse({ ok: true, tracked });
+          break;
+        }
+        case 'toggleDomainTracking': {
+          await toggleDomainTracking(msg.payload.domain, msg.payload.enable);
+          sendResponse({ ok: true });
+          break;
+        }
 
         case 'deleteRecord': {
           await deleteRecord(msg.payload.id);
@@ -257,4 +298,16 @@ chrome.runtime.onInstalled.addListener(async () => {
   const settings = await getSettings();
   await saveSettings(settings);
   console.log('[ATM] Extension installed, settings initialized.');
+});
+
+// 页面加载完成后，如果域名在白名单中，自动启用强制统计模式
+chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
+  if (changeInfo.status !== 'complete' || !tab.url) return;
+  try {
+    const url = new URL(tab.url);
+    const tracked = await isDomainTracked(url.hostname);
+    if (tracked) {
+      chrome.tabs.sendMessage(tabId, { type: 'forceMode:set', enabled: true }).catch(() => {});
+    }
+  } catch {}
 });

@@ -109,6 +109,53 @@ body {
   background: rgba(255,255,255,0.2);
 }
 
+/* ===== 站点统计栏 ===== */
+.site-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  gap: 10px;
+}
+.site-domain {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+.site-toggle {
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--accent-purple);
+  background: var(--accent-gradient-soft);
+  color: var(--accent-purple);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-family: inherit;
+}
+.site-toggle.active {
+  background: var(--accent-gradient);
+  color: #fff;
+  border-color: transparent;
+}
+.site-toggle:hover {
+  filter: brightness(1.05);
+}
+.site-toggle:active {
+  transform: scale(0.97);
+}
+
 /* ===== Tab 导航 ===== */
 .tabs {
   display: flex;

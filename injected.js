@@ -19,11 +19,43 @@
 
   const EXT_ID = '__ai_token_audit__';
   const SSE_DONE = '[DONE]';
+  // 强制统计模式（用户点击"统计本站"后启用，对 unknown 协议也尝试解析）
+  let forceMode = false;
+  // 监听来自 content.js 的强制模式设置
+  window.addEventListener('message', function (event) {
+    if (event.source !== window) return;
+    const data = event.data;
+    if (!data || data.source !== EXT_ID) return;
+    if (data.type === 'forceMode:set') {
+      forceMode = !!data.enabled;
+    }
+  });
 
   // ---------- 工具函数 ----------
 
   function safeJSON(text) {
     try { return JSON.parse(text); } catch { return null; }
+  }
+  /** 强制模式下：判断请求体是否像 AI API 调用（避免统计普通表单/分析请求） */
+  function looksLikeAIRequest(body) {
+    if (!body) return false;
+    const parsed = typeof body === 'string' ? safeJSON(body) : body;
+    if (!parsed || typeof parsed !== 'object') return false;
+    const keys = Object.keys(parsed);
+    // 常见 AI 请求字段
+    const aiFields = ['model', 'messages', 'prompt', 'input', 'content', 'text',
+      'conversation', 'chat', 'query', 'question', 'system', 'temperature',
+      'max_tokens', 'max_tokens_to_sample', 'top_p', 'stream', 'tools',
+      'functions', 'role', 'parts', 'candidates'];
+    for (const k of keys) {
+      if (aiFields.includes(k)) return true;
+      // 嵌套检查：body 里有对象且包含 AI 字段
+      if (parsed[k] && typeof parsed[k] === 'object' && !Array.isArray(parsed[k])) {
+        const subKeys = Object.keys(parsed[k]);
+        if (subKeys.some(sk => aiFields.includes(sk))) return true;
+      }
+    }
+    return false;
   }
 
   /** 从 URL 推断协议类型 */
@@ -354,7 +386,11 @@
     }
 
     const reqBody = init.body || (args[0] instanceof Request ? args[0].body : null);
-    const protocol = detectProtocol(url, reqBody);
+    let protocol = detectProtocol(url, reqBody);
+    // 强制模式：unknown 协议但看起来像 AI 请求，用 generic 兜底
+    if (protocol === 'unknown' && forceMode && looksLikeAIRequest(reqBody)) {
+      protocol = 'generic';
+    }
 
     if (protocol === 'unknown') {
       return originalFetch.apply(this, args);
@@ -454,7 +490,11 @@
       return originalXHRSend.apply(this, arguments);
     }
 
-    const protocol = detectProtocol(this.__atm_url, body);
+    let protocol = detectProtocol(this.__atm_url, body);
+    // 强制模式：unknown 协议但看起来像 AI 请求，用 generic 兜底
+    if (protocol === 'unknown' && forceMode && looksLikeAIRequest(body)) {
+      protocol = 'generic';
+    }
     if (protocol === 'unknown') {
       return originalXHRSend.apply(this, arguments);
     }
