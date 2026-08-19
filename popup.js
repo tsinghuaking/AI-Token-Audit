@@ -280,14 +280,14 @@ function closeDetail() {
 async function exportJSON() {
   const resp = await chrome.runtime.sendMessage({ type: 'exportJSON' });
   if (resp && resp.ok) {
-    downloadFile(JSON.stringify(resp.data, null, 2), 'ai-token-monitor.json', 'application/json');
+    downloadFile(JSON.stringify(resp.data, null, 2), 'ai-token-audit.json', 'application/json');
   }
 }
 
 async function exportCSV() {
   const resp = await chrome.runtime.sendMessage({ type: 'exportCSV' });
   if (resp && resp.ok) {
-    downloadFile(resp.csv, 'ai-token-monitor.csv', 'text/csv');
+    downloadFile(resp.csv, 'ai-token-audit.csv', 'text/csv');
   }
 }
 

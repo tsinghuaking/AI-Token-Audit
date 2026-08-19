@@ -54,18 +54,24 @@
 
 ## Installation
 
-### From CRX (recommended for end users)
+### From Release (recommended for end users)
 
-1. Download `Token-Audit-v1.0.crx` from the [Releases](https://github.com/tsinghuaking/Token-Audit/releases) page.
-2. Open `chrome://extensions/` in your browser, enable "Developer mode" in the top-right corner.
-3. Drag the `.crx` file into the extensions page to install.
+> ⚠️ **Note**: Chrome does **not** support direct drag-and-drop installation of `.crx` files (it will show "not listed in Chrome Web Store" and cannot be enabled). Please follow these steps:
 
-### Load unpacked (for developers)
+1. Download **`AI-Token-Audit-v1.0.crx`** from the [Releases](https://github.com/tsinghuaking/Token-Audit/releases) page.
+2. Rename the `.crx` file to `.zip`, then extract it into a folder (e.g. `AI-Token-Audit/`).
+3. Open `chrome://extensions/` in Chrome / Edge.
+4. Enable "**Developer mode**" in the top-right corner.
+5. Click "**Load unpacked**" in the top-left corner.
+6. Select the extracted folder — installation complete.
 
-1. Open Chrome / Edge, go to `chrome://extensions/`.
-2. Enable "Developer mode" in the top-right corner.
+> Edge browser supports direct drag-and-drop of `.crx` files, no extraction needed.
+
+### Load from source (for developers)
+
+1. `git clone https://github.com/tsinghuaking/Token-Audit.git`
+2. Open `chrome://extensions/`, enable "Developer mode".
 3. Click "Load unpacked" and select the project folder.
-4. The extension icon appears in the toolbar — click to use.
 
 ## Usage
 
@@ -84,7 +90,7 @@
 ## Project Structure
 
 ```
-ai-token-monitor/
+ai-token-audit/
 ├── manifest.json          # Extension manifest (Manifest V3)
 ├── background.js          # Service Worker (central hub: storage, cost, alerts)
 ├── content.js             # Content script (injection bridge)

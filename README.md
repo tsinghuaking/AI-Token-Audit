@@ -54,17 +54,24 @@
 
 ## 📦 安装方法
 
-### 开发者模式加载（当前方式）
+### 方式一：从 Release 下载安装（推荐普通用户）
 
-1. 打开 Chrome / Edge，地址栏输入 `chrome://extensions/`
-2. 右上角开启「开发者模式」
-3. 点击「加载已解压的扩展程序」
-4. 选择本项目的 `ai-token-monitor` 文件夹
-5. 扩展图标出现在工具栏，点击即可使用
+> ⚠️ **注意**：Chrome 浏览器不支持直接拖入 `.crx` 文件安装（会提示"未列在 Chrome 应用商店中"且无法启用），请按以下步骤操作：
 
-### 打包为 .crx（可选）
+1. 到 [Releases](https://github.com/tsinghuaking/Token-Audit/releases) 下载 **`AI-Token-Audit-v1.0.crx`**
+2. 将下载的 `.crx` 文件后缀改为 `.zip`，然后解压到一个文件夹（如 `AI-Token-Audit/`）
+3. 打开 Chrome / Edge，地址栏输入 `chrome://extensions/`
+4. 右上角开启「**开发者模式**」
+5. 点击左上角「**加载已解压的扩展程序**」
+6. 选择刚才解压的文件夹，完成安装
 
-在扩展管理页点击「打包扩展程序」，选择项目根目录即可生成 `.crx` 文件。
+> Edge 浏览器可直接拖入 `.crx` 文件安装，无需解压。
+
+### 方式二：从源码加载（开发者）
+
+1. `git clone https://github.com/tsinghuaking/Token-Audit.git`
+2. 打开 `chrome://extensions/`，开启「开发者模式」
+3. 点击「加载已解压的扩展程序」，选择项目文件夹即可
 
 ## 🚀 使用方法
 
@@ -83,7 +90,7 @@
 ## 📁 项目结构
 
 ```
-ai-token-monitor/
+ai-token-audit/
 ├── manifest.json          # 扩展清单（Manifest V3）
 ├── background.js          # Service Worker（中央枢纽：存储、成本、告警）
 ├── content.js             # 内容脚本（注入桥接）
