@@ -3,7 +3,6 @@
   "name": "AI Token Monitor",
   "version": "1.0.0",
   "description": "实时监测网页AI调用的Token消耗、真实模型与成本，支持历史统计、告警与导出。100%本地运行。",
-  "default_locale": "zh_CN",
   "permissions": [
     "storage",
     "alarms",
