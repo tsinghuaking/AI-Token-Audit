@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "AI Token Monitor",
+  "name": "AI Token Audit",
   "version": "1.0.0",
   "description": "实时监测网页AI调用的Token消耗、真实模型与成本，支持历史统计、告警与导出。100%本地运行。",
   "permissions": [
@@ -23,7 +23,7 @@
       "48": "icons/icon48.png",
       "128": "icons/icon128.png"
     },
-    "default_title": "AI Token Monitor"
+    "default_title": "AI Token Audit"
   },
   "options_page": "options.html",
   "icons": {
